@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import { NAV, SECTION_IDS } from "../nav.js";
 import { padIndex } from "../lib/format.js";
 import { scrollToId } from "../lib/scroll.js";
+import { events, track } from "../lib/analytics.js";
 import { useActiveSection } from "../hooks/useActiveSection.js";
 import { useOverlay } from "../hooks/useOverlay.js";
 import ThemeToggle from "./ThemeToggle.jsx";
@@ -55,7 +56,8 @@ export default function SiteNav() {
 
   useOverlay(open, close);
 
-  const go = (id) => {
+  const go = (id, source = "nav") => {
+    if (source === "nav") track(events.nav(id));
     close();
     requestAnimationFrame(() => scrollToId(id));
   };
@@ -64,7 +66,7 @@ export default function SiteNav() {
     <>
       <header className="fixed top-0 inset-x-0 z-[70] border-b border-stone-200/80 dark:border-stone-800 bg-[#f5f2eb]/85 dark:bg-[#12100e]/85 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-5 md:px-8 h-14 flex items-center justify-between">
-          <button type="button" onClick={() => go("hero")} className="flex items-center gap-2">
+          <button type="button" onClick={() => go("hero", "monogram")} className="flex items-center gap-2">
             <Monogram />
           </button>
 

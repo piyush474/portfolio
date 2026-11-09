@@ -1,4 +1,5 @@
 import React from "react";
+import { events, track } from "../lib/analytics.js";
 import { useTheme } from "../context/ThemeContext.jsx";
 
 function SunIcon() {
@@ -45,7 +46,10 @@ export default function ThemeToggle({ className = "" }) {
   return (
     <button
       type="button"
-      onClick={toggleTheme}
+      onClick={() => {
+        track(isDark ? events.themeLight : events.themeDark);
+        toggleTheme();
+      }}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       title={isDark ? "Light mode" : "Dark mode"}
       className={`inline-flex h-9 w-9 items-center justify-center border border-stone-300 dark:border-stone-700 text-stone-700 dark:text-stone-200 hover:border-copper hover:text-copper transition-colors ${className}`}

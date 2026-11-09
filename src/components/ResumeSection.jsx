@@ -1,10 +1,11 @@
 import React from "react";
 import { SITE } from "../site.js";
+import { events, track } from "../lib/analytics.js";
 import { sectionIndex } from "../nav.js";
 import Section from "./Section.jsx";
 import SectionHeader from "./SectionHeader.jsx";
 
-function ResumeCard({ href, download, kicker, title, detail }) {
+function ResumeCard({ href, download, kicker, title, detail, eventName }) {
   const extra = download
     ? { download }
     : { target: "_blank", rel: "noopener noreferrer" };
@@ -13,6 +14,7 @@ function ResumeCard({ href, download, kicker, title, detail }) {
     <a
       href={href}
       {...extra}
+      onClick={() => eventName && track(eventName)}
       className="group flex flex-col justify-between min-h-[160px] border border-stone-200 dark:border-stone-800 p-6 md:p-8 hover:border-copper transition-colors"
     >
       <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-stone-400 group-hover:text-copper">
@@ -43,6 +45,7 @@ export default function ResumeSection() {
           kicker="View"
           title="Open PDF"
           detail="Read it in a new tab."
+          eventName={events.resumeView}
         />
         <ResumeCard
           href={SITE.resume}
@@ -50,6 +53,7 @@ export default function ResumeSection() {
           kicker="Download"
           title="Save PDF"
           detail="PiyushPurohit_Resume.pdf"
+          eventName={events.resumeDownload}
         />
       </div>
     </Section>

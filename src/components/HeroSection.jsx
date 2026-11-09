@@ -1,17 +1,25 @@
 import React from "react";
 import { SITE } from "../site.js";
+import { events, track } from "../lib/analytics.js";
 import { scrollToId } from "../lib/scroll.js";
 import { useLowPower } from "../hooks/useLowPower.js";
 import Typewriter from "./Typewriter.jsx";
 
-function HeroButton({ to, children, variant = "solid" }) {
+function HeroButton({ to, children, variant = "solid", eventName }) {
   const className =
     variant === "solid"
       ? "px-5 py-2.5 bg-stone-900 dark:bg-stone-100 text-stone-50 dark:text-stone-900 font-mono text-[11px] uppercase tracking-[0.16em] hover:bg-copper dark:hover:bg-copper dark:hover:text-white transition-colors"
       : "px-5 py-2.5 border border-stone-300 dark:border-stone-700 font-mono text-[11px] uppercase tracking-[0.16em] text-stone-700 dark:text-stone-200 hover:border-copper hover:text-copper transition-colors";
 
   return (
-    <button type="button" onClick={() => scrollToId(to)} className={className}>
+    <button
+      type="button"
+      onClick={() => {
+        if (eventName) track(eventName);
+        scrollToId(to);
+      }}
+      className={className}
+    >
       {children}
     </button>
   );
@@ -37,8 +45,10 @@ export default function HeroSection() {
             {lowPower ? SITE.typewriter[0] : <Typewriter phrases={SITE.typewriter} />}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <HeroButton to="experience">View Experience</HeroButton>
-            <HeroButton to="contact" variant="outline">
+            <HeroButton to="experience" eventName={events.heroViewExperience}>
+              View Experience
+            </HeroButton>
+            <HeroButton to="contact" variant="outline" eventName={events.heroContactMe}>
               Contact me
             </HeroButton>
           </div>

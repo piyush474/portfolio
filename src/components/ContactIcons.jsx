@@ -1,10 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import { SITE } from "../site.js";
+import { events, track } from "../lib/analytics.js";
 
 const LINKS = [
   { href: `mailto:${SITE.email}`, label: "Email", detail: SITE.email, external: false, copyText: SITE.email },
-  { href: SITE.linkedin, label: "LinkedIn", detail: "linkedin.com/in/piyushpurohit08", external: true },
-  { href: SITE.github, label: "GitHub", detail: "github.com/piyush474", external: true },
+  {
+    href: SITE.linkedin,
+    label: "LinkedIn",
+    detail: "linkedin.com/in/piyushpurohit08",
+    external: true,
+    eventName: events.linkedin,
+  },
+  {
+    href: SITE.github,
+    label: "GitHub",
+    detail: "github.com/piyush474",
+    external: true,
+    eventName: events.github,
+  },
 ];
 
 async function copyToClipboard(text) {
@@ -72,6 +85,7 @@ function CopyButton({ text }) {
   const onCopy = async (event) => {
     event.preventDefault();
     event.stopPropagation();
+    track(events.emailCopy);
     setCopied(true);
     clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => setCopied(false), 1600);
@@ -103,13 +117,14 @@ function CopyButton({ text }) {
   );
 }
 
-function ContactLink({ href, label, detail, external, copyText }) {
+function ContactLink({ href, label, detail, external, copyText, eventName }) {
   return (
     <div className="group relative border border-stone-200 dark:border-stone-800 hover:border-copper transition-colors">
       <a
         href={href}
         target={external ? "_blank" : undefined}
         rel={external ? "noopener noreferrer" : undefined}
+        onClick={() => eventName && track(eventName)}
         className={`block p-5 ${copyText ? "pr-12" : ""}`}
       >
         <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-stone-400 group-hover:text-copper">

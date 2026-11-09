@@ -10,8 +10,11 @@ import EducationSection from "./components/EducationSection.jsx";
 import ResumeSection from "./components/ResumeSection.jsx";
 import ContactSection from "./components/ContactSection.jsx";
 import SiteFooter from "./components/SiteFooter.jsx";
+import { useSectionViewTracking } from "./hooks/useSectionViewTracking.js";
 
 export default function Launcher() {
+  useSectionViewTracking();
+
   return (
     <div className="min-h-screen bg-page paper-grid">
       <Snowfall />
