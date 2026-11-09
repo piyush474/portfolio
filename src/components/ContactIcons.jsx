@@ -3,7 +3,7 @@ import { SITE } from "../site.js";
 
 const LINKS = [
   { href: `mailto:${SITE.email}`, label: "Email", detail: SITE.email, external: false, copyText: SITE.email },
-  { href: SITE.linkedin, label: "LinkedIn", detail: "piyushpurohit08", external: true },
+  { href: SITE.linkedin, label: "LinkedIn", detail: "linkedin.com/in/piyushpurohit08", external: true },
   { href: SITE.github, label: "GitHub", detail: "github.com/piyush474", external: true },
 ];
 
@@ -86,7 +86,7 @@ function CopyButton({ text }) {
     <button
       type="button"
       onClick={onCopy}
-      aria-label="Copy to clipboard"
+      aria-label="Copy email to clipboard"
       className="group/copy relative inline-flex h-8 w-8 items-center justify-center text-stone-400 hover:text-copper transition-colors"
     >
       {copied ? <CheckIcon /> : <CopyIcon />}
@@ -97,7 +97,7 @@ function CopyButton({ text }) {
             : "opacity-0 group-hover/copy:opacity-100 group-focus-visible/copy:opacity-100"
         }`}
       >
-        {copied ? "Copied" : "Copy to clipboard"}
+        {copied ? "Copied" : "Copy email to clipboard"}
       </span>
     </button>
   );
