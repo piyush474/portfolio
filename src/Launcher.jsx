@@ -54,71 +54,79 @@ function SiteNav() {
     if (!open) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    const onKey = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
     };
   }, [open]);
 
   const go = (id) => {
-    scrollToId(id);
     setOpen(false);
+    requestAnimationFrame(() => scrollToId(id));
   };
 
   return (
-    <header className="fixed top-0 inset-x-0 z-40 border-b border-stone-200/80 dark:border-stone-800 bg-[#f5f2eb]/85 dark:bg-[#12100e]/85 backdrop-blur-md">
-      <div className="max-w-6xl mx-auto px-5 md:px-8 h-14 flex items-center justify-between">
-        <button type="button" onClick={() => go("hero")} className="flex items-center gap-2">
-          <Monogram />
-        </button>
-
-        <nav className="hidden md:flex items-center gap-4 lg:gap-6">
-          {NAV.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => go(item.id)}
-              className={`font-mono text-[11px] uppercase tracking-[0.16em] transition-colors ${
-                active === item.id
-                  ? "text-copper"
-                  : "text-stone-500 hover:text-stone-900 dark:hover:text-stone-100"
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-3">
-          <ThemeToggle />
-          <button
-            type="button"
-            className="md:hidden inline-flex h-9 w-9 items-center justify-center border border-stone-300 dark:border-stone-700 text-stone-700 dark:text-stone-200"
-            onClick={() => setOpen(true)}
-            aria-label="Open navigation"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M4 7h16M4 12h16M4 17h16" />
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {open && (
-        <div className="md:hidden fixed inset-0 z-50 bg-[#f5f2eb] dark:bg-[#12100e] px-5 py-6">
-          <div className="flex items-center justify-between">
+    <>
+      <header className="fixed top-0 inset-x-0 z-[70] border-b border-stone-200/80 dark:border-stone-800 bg-[#f5f2eb]/85 dark:bg-[#12100e]/85 backdrop-blur-md">
+        <div className="max-w-6xl mx-auto px-5 md:px-8 h-14 flex items-center justify-between">
+          <button type="button" onClick={() => go("hero")} className="flex items-center gap-2">
             <Monogram />
+          </button>
+
+          <nav className="hidden md:flex items-center gap-4 lg:gap-6">
+            {NAV.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => go(item.id)}
+                className={`font-mono text-[11px] uppercase tracking-[0.16em] transition-colors ${
+                  active === item.id
+                    ? "text-copper"
+                    : "text-stone-500 hover:text-stone-900 dark:hover:text-stone-100"
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
             <button
               type="button"
-              onClick={() => setOpen(false)}
-              aria-label="Close navigation"
-              className="h-9 w-9 border border-stone-300 dark:border-stone-700 inline-flex items-center justify-center"
+              className="md:hidden inline-flex h-9 w-9 items-center justify-center border border-stone-300 dark:border-stone-700 text-stone-700 dark:text-stone-200"
+              onClick={() => setOpen((v) => !v)}
+              aria-label={open ? "Close navigation" : "Open navigation"}
+              aria-expanded={open}
+              aria-controls="mobile-nav"
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M6 6l12 12M6 18L18 6" />
-              </svg>
+              {open ? (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M6 6l12 12M6 18L18 6" />
+                </svg>
+              ) : (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M4 7h16M4 12h16M4 17h16" />
+                </svg>
+              )}
             </button>
           </div>
-          <nav className="mt-12 flex flex-col gap-5">
+        </div>
+      </header>
+
+      {open ? (
+        <div
+          id="mobile-nav"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Site navigation"
+          className="md:hidden fixed inset-0 z-[60] min-h-dvh bg-[#f5f2eb] dark:bg-[#12100e] px-5 pt-20 pb-10 overflow-y-auto overscroll-contain"
+        >
+          <nav className="flex flex-col gap-5">
             {NAV.map((item, i) => (
               <button
                 key={item.id}
@@ -126,7 +134,9 @@ function SiteNav() {
                 onClick={() => go(item.id)}
                 className="text-left flex items-baseline gap-4"
               >
-                <span className="font-mono text-[11px] text-copper">0{i + 1}</span>
+                <span className="font-mono text-[11px] text-copper">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <span className="font-display text-3xl text-stone-900 dark:text-stone-100">
                   {item.label}
                 </span>
@@ -134,8 +144,8 @@ function SiteNav() {
             ))}
           </nav>
         </div>
-      )}
-    </header>
+      ) : null}
+    </>
   );
 }
 
@@ -210,8 +220,8 @@ export default function Launcher() {
   return (
     <div className="min-h-screen bg-page paper-grid">
       <Snowfall />
-      <div className="relative z-10">
       <SiteNav />
+      <div className="relative z-10">
 
       <section
         id="hero"
