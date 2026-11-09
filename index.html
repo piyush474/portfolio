@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#12100e" />
+    <meta name="color-scheme" content="dark light" />
+
+    <title>Piyush Purohit — Software Engineer, ML Systems</title>
+    <meta
+      name="description"
+      content="Portfolio of Piyush Purohit. Software engineer building production ML systems — low-latency serving, LLM evaluation, Trust & Safety, and distributed infrastructure."
+    />
+    <meta name="author" content="Piyush Purohit" />
+    <meta name="robots" content="index, follow" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Piyush Purohit" />
+    <meta property="og:title" content="Piyush Purohit — Software Engineer, ML Systems" />
+    <meta
+      property="og:description"
+      content="Production ML systems, Trust & Safety infrastructure, and distributed data pipelines."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Piyush Purohit — Software Engineer, ML Systems" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var dark = stored ? stored === "dark" : true;
+          document.documentElement.classList.toggle("dark", dark);
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute("content", dark ? "#12100e" : "#f5f2eb");
+        } catch (e) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <div style="padding: 2rem; font-family: Georgia, serif; color: #1a1a1a; background: #fafafa;">
+        This site is a React app — please enable JavaScript to view it.
+        You can also reach me at
+        <a href="mailto:puropiyush@gmail.com">puropiyush@gmail.com</a>.
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

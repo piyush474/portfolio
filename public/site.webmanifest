@@ -1,0 +1,16 @@
+{
+  "name": "Piyush Purohit",
+  "short_name": "Piyush",
+  "description": "Software engineer building production ML systems.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#12100e",
+  "theme_color": "#12100e",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
