@@ -14,7 +14,7 @@ export default function ProjectsSection() {
         index={sectionIndex("projects")}
         eyebrow="Projects"
         title="Select projects"
-        description="Accent Mirror, Visual Recs, and MiniMQ. GitHub is linked; live URLs land here when demos ship."
+        description="Independent systems I designed and shipped end to end, outside of day-job work."
       />
       <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.16em] text-stone-400">
         {liveCount}/{PROJECTS.length} live

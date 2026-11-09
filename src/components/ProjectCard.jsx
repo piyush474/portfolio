@@ -67,26 +67,9 @@ function ProjectAction({ live, githubUrl }) {
   return <span className="font-mono text-[11px] text-stone-400">URL pending</span>;
 }
 
-export function ProjectTile({ project, index }) {
-  const live = isProjectLive(project);
-  const Wrapper = live ? "a" : "article";
-  const wrapperProps = live
-    ? {
-        href: project.prodUrl,
-        target: "_blank",
-        rel: "noopener noreferrer",
-      }
-    : {};
-
+function ProjectBody({ project, index, live }) {
   return (
-    <Wrapper
-      {...wrapperProps}
-      className={`group flex flex-col justify-between min-h-[280px] p-6 md:p-8 border transition-colors ${
-        project.placeholder
-          ? "border-dashed border-stone-300 dark:border-stone-700 bg-transparent"
-          : "border-stone-200 dark:border-stone-800 bg-white/40 dark:bg-stone-900/40 hover:border-copper"
-      }`}
-    >
+    <>
       <div>
         <div className="flex items-center justify-between">
           <span className="font-mono text-[11px] text-stone-400">{padIndex(index)}</span>
@@ -103,6 +86,30 @@ export function ProjectTile({ project, index }) {
         <StackList items={project.stack} />
         <ProjectAction live={live} githubUrl={project.githubUrl} />
       </div>
+    </>
+  );
+}
+
+export function ProjectTile({ project, index }) {
+  const live = isProjectLive(project);
+  const Wrapper = live ? "a" : "article";
+  const wrapperProps = live
+    ? {
+        href: project.prodUrl,
+        target: "_blank",
+        rel: "noopener noreferrer",
+      }
+    : {};
+  return (
+    <Wrapper
+      {...wrapperProps}
+      className={`group flex flex-col justify-between min-h-[280px] border p-6 md:p-8 transition-colors ${
+        project.placeholder
+          ? "border-dashed border-stone-300 dark:border-stone-700 bg-transparent"
+          : "border-stone-200 dark:border-stone-800 bg-white/40 dark:bg-stone-900/40 hover:border-copper hover:bg-copper/10 dark:hover:bg-copper/15"
+      }`}
+    >
+      <ProjectBody project={project} index={index} live={live} />
     </Wrapper>
   );
 }

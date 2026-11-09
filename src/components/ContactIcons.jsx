@@ -119,7 +119,7 @@ function CopyButton({ text }) {
 
 function ContactLink({ href, label, detail, external, copyText, eventName }) {
   return (
-    <div className="group relative border border-stone-200 dark:border-stone-800 hover:border-copper transition-colors">
+    <div className="group relative border border-stone-200 dark:border-stone-800 hover:border-copper hover:bg-copper/10 dark:hover:bg-copper/15 transition-colors">
       <a
         href={href}
         target={external ? "_blank" : undefined}

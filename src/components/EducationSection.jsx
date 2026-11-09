@@ -20,7 +20,12 @@ function SchoolItem({ school, location, degree, dates }) {
 export default function EducationSection() {
   return (
     <Section id="education">
-      <SectionHeader index={sectionIndex("education")} eyebrow="Education" title="School" />
+      <SectionHeader
+        index={sectionIndex("education")}
+        eyebrow="Education"
+        title="School"
+        description="Focused on distributed systems, algorithms, and cloud."
+      />
       <div className="space-y-10">
         {SCHOOLS.map((item) => (
           <SchoolItem key={item.school} {...item} />

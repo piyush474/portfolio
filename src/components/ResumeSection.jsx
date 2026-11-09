@@ -15,7 +15,7 @@ function ResumeCard({ href, download, kicker, title, detail, eventName }) {
       href={href}
       {...extra}
       onClick={() => eventName && track(eventName)}
-      className="group flex flex-col justify-between min-h-[160px] border border-stone-200 dark:border-stone-800 p-6 md:p-8 hover:border-copper transition-colors"
+      className="group flex flex-col justify-between min-h-[160px] border border-stone-200 dark:border-stone-800 p-6 md:p-8 hover:border-copper hover:bg-copper/10 dark:hover:bg-copper/15 transition-colors"
     >
       <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-stone-400 group-hover:text-copper">
         {kicker}
@@ -37,13 +37,17 @@ export default function ResumeSection() {
         index={sectionIndex("resume")}
         eyebrow="Resume"
         title="One pager"
-        description="A PDF of recent roles, systems, and education. Open it in the browser or save a copy."
+        description="Open my resume in the browser or save a copy"
       />
       <div className="grid sm:grid-cols-2 gap-4">
         <ResumeCard
           href={SITE.resume}
           kicker="View"
-          title="Open PDF"
+          title={
+            <>
+              Open <span className="text-copper">resume</span>
+            </>
+          }
           detail="Read it in a new tab."
           eventName={events.resumeView}
         />
@@ -51,7 +55,11 @@ export default function ResumeSection() {
           href={SITE.resume}
           download="PiyushPurohit_Resume.pdf"
           kicker="Download"
-          title="Save PDF"
+          title={
+            <>
+              Save <span className="text-copper">resume</span>
+            </>
+          }
           detail="PiyushPurohit_Resume.pdf"
           eventName={events.resumeDownload}
         />
