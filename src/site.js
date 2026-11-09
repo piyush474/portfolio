@@ -11,7 +11,7 @@ export const SITE = {
   phone: "+1 (408) 210-7541",
   linkedin: "https://www.linkedin.com/in/piyushpurohit08",
   github: "https://github.com/PiyushPurohit08",
-  resume: "/PiyushPurohit_Resume.pdf",
+  resume: "/resume/PiyushPurohit_Resume.pdf",
   roles: ["ML Systems", "FullStack", "Distributed Systems"],
   typewriter: [
     "Building low-latency ML serving",

@@ -1,5 +1,7 @@
 # Piyush Purohit — Portfolio
 
+![Portfolio preview](docs/preview.png)
+
 Personal site for [Piyush Purohit](https://github.com/piyush474): ML systems, fullstack, and distributed systems.
 
 ## Stack
@@ -21,7 +23,7 @@ The app runs at [http://localhost:5173](http://localhost:5173).
 
 - Personal links: `src/site.js`
 - Projects: `src/registry.js` — set `prodUrl` when a demo ships
-- Resume: `public/PiyushPurohit_Resume.pdf`
+- Resume: [`public/resume/PiyushPurohit_Resume.pdf`](public/resume/PiyushPurohit_Resume.pdf)
 
 ## Build
 
