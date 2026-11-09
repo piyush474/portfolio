@@ -25,14 +25,16 @@ function CloseIcon() {
 }
 
 function DesktopNavLink({ item, active, onGo }) {
+  const isActive = active === item.id;
+
   return (
     <button
       type="button"
       onClick={() => onGo(item.id)}
-      className={`font-mono text-[11px] uppercase tracking-[0.16em] transition-colors ${
-        active === item.id
-          ? "text-copper"
-          : "text-stone-500 hover:text-stone-900 dark:hover:text-stone-100"
+      className={`font-mono text-[11px] uppercase tracking-[0.16em] pb-1 border-b transition-colors ${
+        isActive
+          ? "text-copper border-copper"
+          : "text-stone-500 border-transparent hover:text-stone-900 dark:hover:text-stone-100"
       }`}
     >
       {item.label}
@@ -40,11 +42,21 @@ function DesktopNavLink({ item, active, onGo }) {
   );
 }
 
-function MobileNavLink({ item, index, onGo }) {
+function MobileNavLink({ item, index, active, onGo }) {
+  const isActive = active === item.id;
+
   return (
     <button type="button" onClick={() => onGo(item.id)} className="text-left flex items-baseline gap-4">
       <span className="font-mono text-[11px] text-copper">{padIndex(index)}</span>
-      <span className="font-display text-3xl text-stone-900 dark:text-stone-100">{item.label}</span>
+      <span
+        className={`font-display text-3xl pb-1 border-b ${
+          isActive
+            ? "text-copper border-copper"
+            : "text-stone-900 dark:text-stone-100 border-transparent"
+        }`}
+      >
+        {item.label}
+      </span>
     </button>
   );
 }
@@ -102,7 +114,7 @@ export default function SiteNav() {
         >
           <nav className="flex flex-col gap-5">
             {NAV.map((item, index) => (
-              <MobileNavLink key={item.id} item={item} index={index} onGo={go} />
+              <MobileNavLink key={item.id} item={item} index={index} active={active} onGo={go} />
             ))}
           </nav>
         </div>
