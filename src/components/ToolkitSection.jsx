@@ -7,13 +7,10 @@ import SectionHeader from "./SectionHeader.jsx";
 function SkillGroup({ title, items }) {
   return (
     <div>
-      <h3 className="font-mono text-[11px] uppercase tracking-[0.18em] text-copper">{title}</h3>
-      <ul className="mt-4 space-y-2">
+      <h3 className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-copper">{title}</h3>
+      <ul className="mt-4 space-y-1.5">
         {items.map((item) => (
-          <li
-            key={item}
-            className="text-sm text-stone-600 dark:text-stone-300 border-b border-stone-200/80 dark:border-stone-800 pb-2"
-          >
+          <li key={item} className="text-sm text-stone-600 dark:text-stone-300">
             {item}
           </li>
         ))}
