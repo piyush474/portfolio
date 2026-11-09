@@ -17,9 +17,9 @@ import portrait from "../images/img1.png";
 
 const NAV = [
   { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "projects", label: "Work" },
   { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
+  { id: "toolkit", label: "Toolkit" },
   { id: "education", label: "Education" },
   { id: "resume", label: "Resume" },
   { id: "contact", label: "Contact" },
@@ -186,9 +186,9 @@ function ExperienceSection() {
     <section id="experience" className="relative z-10 px-5 md:px-8 py-10 md:py-14 scroll-mt-24">
       <div className="max-w-5xl mx-auto">
         <SectionHeader
-          index="04"
-          eyebrow="Experience"
-          title="Work"
+          index="02"
+          eyebrow="Work experience"
+          title="Work experience"
           description="4+ years (non-internship) experience building fullstack products and production ML systems."
         />
         <ExperienceTimeline />
@@ -266,14 +266,14 @@ export default function Launcher() {
       </section>
 
       <AboutSection />
-      <TechCarousel />
+      <ExperienceSection />
 
       <div id="projects" className="relative z-10 px-5 md:px-8 py-10 md:py-14 scroll-mt-24">
         <div className="max-w-5xl mx-auto">
           <SectionHeader
             index="03"
             eyebrow="Projects"
-            title="Selected work"
+            title="Select projects"
             description="Accent Mirror, Visual Recs, and MiniMQ. GitHub is linked; live URLs land here when demos ship."
           />
           <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.16em] text-stone-400">
@@ -287,7 +287,7 @@ export default function Launcher() {
         </div>
       </div>
 
-      <ExperienceSection />
+      <TechCarousel />
       <EducationSection />
       <ResumeSection />
       <ContactSection />

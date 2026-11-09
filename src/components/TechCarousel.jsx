@@ -37,11 +37,11 @@ const GROUPS = [
 
 export default function TechCarousel() {
   return (
-    <section id="skills" className="relative z-10 px-5 md:px-8 py-10 md:py-14 scroll-mt-24">
+    <section id="toolkit" className="relative z-10 px-5 md:px-8 py-10 md:py-14 scroll-mt-24">
       <div className="max-w-5xl mx-auto">
         <SectionHeader
-          index="02"
-          eyebrow="Skills"
+          index="04"
+          eyebrow="Toolkit"
           title="Toolkit"
           description="Languages, ML systems, and infrastructure used to ship production software."
         />
