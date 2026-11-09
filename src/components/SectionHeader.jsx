@@ -7,7 +7,7 @@ export default function SectionHeader({ index, eyebrow, title, description }) {
       <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-copper">
         {index} — {eyebrow}
       </p>
-      <div className="mt-3 flex items-end justify-between gap-6 border-b border-stone-300 dark:border-stone-700 pb-5">
+      <div className="mt-3 flex items-start justify-between gap-6 border-b border-stone-300 dark:border-stone-700 pb-5">
         <div>
           <h2 className="relative isolate w-fit font-display text-4xl md:text-5xl text-stone-900 dark:text-stone-100 leading-none tracking-tight">
             <BrushStroke className="z-0 -left-[calc(10%+8px)] -top-[28%] w-[calc(124%+16px)] h-[168%]" />

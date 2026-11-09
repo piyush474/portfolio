@@ -2,6 +2,49 @@ import React, { useEffect, useRef } from "react";
 import { useIsMobile, usePrefersReducedMotion } from "../hooks/useLowPower.js";
 import { useTheme } from "../context/ThemeContext.jsx";
 
+function createFlake(width, height) {
+  return {
+    x: Math.random() * width,
+    y: Math.random() * height,
+    r: 0.7 + Math.random() * 1.4,
+    vy: 0.18 + Math.random() * 0.38,
+    vx: -0.12 + Math.random() * 0.24,
+    sway: 0.006 + Math.random() * 0.008,
+    phase: Math.random() * Math.PI * 2,
+  };
+}
+
+function sizeCanvas(canvas, ctx) {
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  canvas.width = Math.floor(width * dpr);
+  canvas.height = Math.floor(height * dpr);
+  canvas.style.width = `${width}px`;
+  canvas.style.height = `${height}px`;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+function stepFlake(flake, width, height) {
+  flake.phase += flake.sway;
+  flake.x += flake.vx + Math.sin(flake.phase) * 0.18;
+  flake.y += flake.vy;
+  if (flake.y > height + 6) {
+    flake.y = -6;
+    flake.x = Math.random() * width;
+  } else if (flake.x < -6) {
+    flake.x = width + 6;
+  } else if (flake.x > width + 6) {
+    flake.x = -6;
+  }
+}
+
+function drawFlake(ctx, flake) {
+  ctx.beginPath();
+  ctx.arc(flake.x, flake.y, flake.r, 0, Math.PI * 2);
+  ctx.fill();
+}
+
 export default function Snowfall() {
   const canvasRef = useRef(null);
   const reduced = usePrefersReducedMotion();
@@ -19,41 +62,22 @@ export default function Snowfall() {
     let raf = 0;
     let running = true;
 
-    const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      canvas.width = Math.floor(w * dpr);
-      canvas.height = Math.floor(h * dpr);
-      canvas.style.width = `${w}px`;
-      canvas.style.height = `${h}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
-
     const seed = () => {
       flakes.length = 0;
-      const w = window.innerWidth;
-      const h = window.innerHeight;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
       for (let i = 0; i < count; i += 1) {
-        flakes.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          r: 0.7 + Math.random() * 1.4,
-          vy: 0.18 + Math.random() * 0.38,
-          vx: -0.12 + Math.random() * 0.24,
-          sway: 0.006 + Math.random() * 0.008,
-          phase: Math.random() * Math.PI * 2,
-        });
+        flakes.push(createFlake(width, height));
       }
     };
+
+    const resize = () => sizeCanvas(canvas, ctx);
 
     resize();
     seed();
     window.addEventListener("resize", resize);
 
-    const color = isDark
-      ? "rgba(245, 242, 235, 0.32)"
-      : "rgba(87, 83, 78, 0.42)";
+    const color = isDark ? "rgba(245, 242, 235, 0.32)" : "rgba(87, 83, 78, 0.42)";
 
     const tick = () => {
       if (!running) return;
@@ -61,27 +85,14 @@ export default function Snowfall() {
         raf = requestAnimationFrame(tick);
         return;
       }
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      ctx.clearRect(0, 0, w, h);
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      ctx.clearRect(0, 0, width, height);
       ctx.fillStyle = color;
-      for (let i = 0; i < flakes.length; i += 1) {
-        const f = flakes[i];
-        f.phase += f.sway;
-        f.x += f.vx + Math.sin(f.phase) * 0.18;
-        f.y += f.vy;
-        if (f.y > h + 6) {
-          f.y = -6;
-          f.x = Math.random() * w;
-        } else if (f.x < -6) {
-          f.x = w + 6;
-        } else if (f.x > w + 6) {
-          f.x = -6;
-        }
-        ctx.beginPath();
-        ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-        ctx.fill();
-      }
+      flakes.forEach((flake) => {
+        stepFlake(flake, width, height);
+        drawFlake(ctx, flake);
+      });
       raf = requestAnimationFrame(tick);
     };
 
@@ -97,10 +108,6 @@ export default function Snowfall() {
   if (reduced) return null;
 
   return (
-    <canvas
-      ref={canvasRef}
-      aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-[1]"
-    />
+    <canvas ref={canvasRef} aria-hidden="true" className="pointer-events-none fixed inset-0 z-[1]" />
   );
 }
