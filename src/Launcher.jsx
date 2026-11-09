@@ -13,6 +13,7 @@ import SectionHeader from "./components/SectionHeader.jsx";
 import { ProjectTile } from "./components/ProjectCard.jsx";
 import { useLowPower } from "./hooks/useLowPower.js";
 import Snowfall from "./components/Snowfall.jsx";
+import portrait from "../images/img1.png";
 
 const NAV = [
   { id: "about", label: "About" },
@@ -140,10 +141,10 @@ function SiteNav() {
 
 function AboutSection() {
   return (
-    <section id="about" className="relative z-10 px-5 md:px-8 py-20 md:py-28 scroll-mt-24">
+    <section id="about" className="relative z-10 px-5 md:px-8 py-10 md:py-14 scroll-mt-24">
       <div className="max-w-5xl mx-auto">
         <SectionHeader index="01" eyebrow="About" title="A short brief" />
-        <div className="grid md:grid-cols-12 gap-10">
+        <div className="grid md:grid-cols-12 gap-10 md:gap-8 items-start">
           <div className="md:col-span-7 space-y-5 text-lg leading-relaxed text-stone-600 dark:text-stone-300">
             <p>
               Software engineer with 4+ years building and shipping production ML
@@ -157,19 +158,13 @@ function AboutSection() {
               feature pipelines.
             </p>
           </div>
-          <aside className="md:col-span-5 md:border-l md:border-stone-200 dark:md:border-stone-800 md:pl-8">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-stone-400">
-              Based in
-            </p>
-            <p className="mt-2 font-display text-3xl text-stone-900 dark:text-stone-100">
-              {SITE.location}
-            </p>
-            <ul className="mt-6 space-y-3 text-sm text-stone-600 dark:text-stone-300">
-              <li>Python, Java, Go</li>
-              <li>Distributed systems on Kubernetes and AWS</li>
-              <li>LLM evals, serving, and retrieval</li>
-            </ul>
-          </aside>
+          <div className="md:col-span-5 flex justify-center">
+            <img
+              src={portrait}
+              alt="Illustrated portrait of Piyush Purohit at a desk"
+              className="w-auto max-h-[16rem] md:max-h-[18rem] object-contain object-center"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -178,13 +173,13 @@ function AboutSection() {
 
 function ExperienceSection() {
   return (
-    <section id="experience" className="relative z-10 px-5 md:px-8 py-20 md:py-28 scroll-mt-24">
+    <section id="experience" className="relative z-10 px-5 md:px-8 py-10 md:py-14 scroll-mt-24">
       <div className="max-w-5xl mx-auto">
         <SectionHeader
           index="04"
           eyebrow="Experience"
           title="Work"
-          description="4+ years of experience building fullstack products and production ML systems."
+          description="4+ years (non-internship) experience building fullstack products and production ML systems."
         />
         <ExperienceTimeline />
       </div>
@@ -194,7 +189,7 @@ function ExperienceSection() {
 
 function ContactSection() {
   return (
-    <section id="contact" className="relative z-10 px-5 md:px-8 py-20 md:py-28 scroll-mt-24">
+    <section id="contact" className="relative z-10 px-5 md:px-8 py-10 md:py-14 scroll-mt-24">
       <div className="max-w-5xl mx-auto">
         <SectionHeader
           index="07"
@@ -243,17 +238,18 @@ export default function Launcher() {
             <div className="mt-8 flex flex-wrap gap-3">
               <button
                 type="button"
-                onClick={() => scrollToId("projects")}
+                onClick={() => scrollToId("experience")}
                 className="px-5 py-2.5 bg-stone-900 dark:bg-stone-100 text-stone-50 dark:text-stone-900 font-mono text-[11px] uppercase tracking-[0.16em] hover:bg-copper dark:hover:bg-copper dark:hover:text-white transition-colors"
               >
-                View work
+                View Experience
               </button>
-              <a
-                href={`mailto:${SITE.email}`}
+              <button
+                type="button"
+                onClick={() => scrollToId("contact")}
                 className="px-5 py-2.5 border border-stone-300 dark:border-stone-700 font-mono text-[11px] uppercase tracking-[0.16em] text-stone-700 dark:text-stone-200 hover:border-copper hover:text-copper transition-colors"
               >
-                Email me
-              </a>
+                Contact me
+              </button>
             </div>
           </div>
         </div>
@@ -262,7 +258,7 @@ export default function Launcher() {
       <AboutSection />
       <TechCarousel />
 
-      <div id="projects" className="relative z-10 px-5 md:px-8 py-20 md:py-28 scroll-mt-24">
+      <div id="projects" className="relative z-10 px-5 md:px-8 py-10 md:py-14 scroll-mt-24">
         <div className="max-w-5xl mx-auto">
           <SectionHeader
             index="03"
@@ -270,7 +266,7 @@ export default function Launcher() {
             title="Selected work"
             description="Accent Mirror, Visual Recs, and MiniMQ. GitHub is linked; live URLs land here when demos ship."
           />
-          <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.16em] text-stone-400">
+          <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.16em] text-stone-400">
             {liveCount}/{PROJECTS.length} live
           </p>
           <div className="grid md:grid-cols-2 gap-4">

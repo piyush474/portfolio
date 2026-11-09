@@ -4,7 +4,7 @@ import { SITE } from "../site.js";
 const LINKS = [
   { href: `mailto:${SITE.email}`, label: "Email", detail: SITE.email, external: false },
   { href: SITE.linkedin, label: "LinkedIn", detail: "piyushpurohit08", external: true },
-  { href: SITE.github, label: "GitHub", detail: "PiyushPurohit08", external: true },
+  { href: SITE.github, label: "GitHub", detail: "github.com/piyush474", external: true },
 ];
 
 export default function ContactIcons() {

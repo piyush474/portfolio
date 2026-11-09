@@ -37,7 +37,7 @@ const GROUPS = [
 
 export default function TechCarousel() {
   return (
-    <section id="skills" className="relative z-10 px-5 md:px-8 py-20 md:py-28 scroll-mt-24">
+    <section id="skills" className="relative z-10 px-5 md:px-8 py-10 md:py-14 scroll-mt-24">
       <div className="max-w-5xl mx-auto">
         <SectionHeader
           index="02"

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function SectionHeader({ index, eyebrow, title, description }) {
   return (
-    <header className="relative mb-12 md:mb-16">
+    <header className="relative mb-6 md:mb-8">
       <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-copper">
         {index} — {eyebrow}
       </p>

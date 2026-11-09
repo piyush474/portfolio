@@ -18,7 +18,7 @@ const SCHOOLS = [
 
 export default function EducationSection() {
   return (
-    <section id="education" className="relative z-10 px-5 md:px-8 py-20 md:py-28 scroll-mt-24">
+    <section id="education" className="relative z-10 px-5 md:px-8 py-10 md:py-14 scroll-mt-24">
       <div className="max-w-5xl mx-auto">
         <SectionHeader index="05" eyebrow="Education" title="School" />
 

@@ -80,7 +80,7 @@ export function ProjectTile({ project, index }) {
           ))}
         </div>
         {live ? (
-          <span className="font-mono text-[11px] text-copper group-hover:translate-x-0.5 transition-transform">
+          <span className="shrink-0 inline-flex items-center font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 border border-stone-300 dark:border-stone-600 text-stone-700 dark:text-stone-200 group-hover:border-copper group-hover:text-copper transition-colors">
             Visit ↗
           </span>
         ) : project.githubUrl ? (
@@ -88,7 +88,7 @@ export function ProjectTile({ project, index }) {
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-mono text-[11px] text-copper hover:underline"
+            className="shrink-0 inline-flex items-center font-mono text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 border border-stone-300 dark:border-stone-600 text-stone-700 dark:text-stone-200 hover:border-copper hover:text-copper transition-colors"
             onClick={(e) => e.stopPropagation()}
           >
             GitHub ↗

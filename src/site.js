@@ -10,7 +10,7 @@ export const SITE = {
   email: "puropiyush@gmail.com",
   phone: "+1 (408) 210-7541",
   linkedin: "https://www.linkedin.com/in/piyushpurohit08",
-  github: "https://github.com/PiyushPurohit08",
+  github: "https://github.com/piyush474",
   resume: "/resume/PiyushPurohit_Resume.pdf",
   roles: ["ML Systems", "FullStack", "Distributed Systems"],
   typewriter: [
