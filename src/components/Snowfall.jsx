@@ -14,7 +14,7 @@ export default function Snowfall() {
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d", { alpha: true });
-    const count = isMobile ? 28 : 46;
+    const count = isMobile ? 56 : 92;
     const flakes = [];
     let raf = 0;
     let running = true;
